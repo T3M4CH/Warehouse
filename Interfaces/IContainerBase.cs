@@ -1,4 +1,6 @@
-﻿namespace Warehouse.Interfaces;
+﻿using Warehouse.Products;
+
+namespace Warehouse.Interfaces;
 
 public interface IContainerBase
 {

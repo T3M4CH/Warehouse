@@ -1,13 +1,14 @@
 ﻿using Warehouse.Interfaces;
+using Warehouse.Products;
 
-namespace Warehouse;
+namespace Warehouse.Containers;
 
 public class Box<T> : IContainerService<T> where T : Product
 {
     private const int Size = 10;
 
-    private int _currentSize = 0;
-    private double _currentWeight = 0;
+    private int _currentSize;
+    private double _currentWeight ;
     private readonly double _maxWeight;
 
     private readonly List<T> _products = new();
@@ -34,7 +35,7 @@ public class Box<T> : IContainerService<T> where T : Product
         _products.Add(product);
     }
 
-    T IContainerService<T>.GetProduct(int id)
+    T? IContainerService<T>.GetProduct(int id)
     {
         try
         {

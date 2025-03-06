@@ -1,4 +1,6 @@
-﻿namespace Warehouse;
+﻿using Warehouse.Products;
+
+namespace Warehouse.Containers;
 
 public class Pallet<T> : Box<T> where T : Product
 {

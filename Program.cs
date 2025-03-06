@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Warehouse;
+using Warehouse.Containers;
+using Warehouse.Products;
 
 var foodBox = new Box<Food>(50.0);
 var clothesBox = new Box<Clothes>(50.0);
@@ -16,7 +17,7 @@ foodBox.AddProduct(new Food("Snacks", 0.5, new DateTime(2025, 3, 10)));
 foodBox.AddProduct(new Food("GodCheese", 0.2, new DateTime(2025, 3, 15)));
 foodBox.AddProduct(new Food("ExpiredFood", 0.2, new DateTime(2025, 2, 1)));
 
-var warehouse = new Warehouse.Warehouse();
+var warehouse = new Warehouse.Controller.Warehouse();
 warehouse.AddContainer(animalsPallet);
 warehouse.AddContainer(clothesBox);
 warehouse.AddContainer(foodBox);

@@ -1,4 +1,4 @@
-﻿namespace Warehouse;
+﻿namespace Warehouse.Products;
 
 public class Animals : Product
 {

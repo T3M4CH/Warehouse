@@ -1,6 +1,7 @@
 ﻿using Warehouse.Interfaces;
+using Warehouse.Products;
 
-namespace Warehouse;
+namespace Warehouse.Controller;
 
 public class Warehouse
 {
