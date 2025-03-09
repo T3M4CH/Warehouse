@@ -1,5 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
+using Scalar.AspNetCore;
 using Warehouse.Containers;
 using Warehouse.Products;
 
@@ -26,3 +29,23 @@ warehouse.SortContainersByWeight();
 
 Console.WriteLine("Clothes < 2kg " + string.Join(',', warehouse.FilterProducts(product => product is Clothes { Weight: <= 2 }).Select(pr => pr.Name)));
 Console.WriteLine("Not expired food " + string.Join(',', warehouse.FilterProducts(product => product is Food food && food.ExpireDate > DateTime.Now).Select(pr => pr.Name)));
+
+// ###
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddOpenApi();
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.MapScalarApiReference();
+}
+
+app.MapGet("/", () => "Hello World");
+
+app.UseHttpsRedirection();
+
+app.Run();
