@@ -1,9 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Scalar.AspNetCore;
 using Warehouse.Containers;
+using Warehouse.Data;
 using Warehouse.Products;
 
 var foodBox = new Box<Food>(50.0);
@@ -34,7 +36,11 @@ Console.WriteLine("Not expired food " + string.Join(',', warehouse.FilterProduct
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
+builder.Services.AddDbContext<DataContext>
+    (options => options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
 
 var app = builder.Build();
 
@@ -46,6 +52,16 @@ if (app.Environment.IsDevelopment())
 
 app.MapGet("/", () => "Hello World");
 
-app.UseHttpsRedirection();
+var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+
+var context = services.GetRequiredService<DataContext>();
+
+
+context.Database.Migrate();
+
+app.MapControllers();
+
+//app.UseHttpsRedirection();
 
 app.Run();
