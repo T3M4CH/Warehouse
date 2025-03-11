@@ -1,8 +1,8 @@
-﻿using Warehouse.Products;
+﻿using Warehouse.Entities;
 
 namespace Warehouse.Containers;
 
-public class Pallet<T> : Box<T> where T : Product
+public class Pallet : Box
 {
     private readonly double _minProductWeight;
 
@@ -11,13 +11,11 @@ public class Pallet<T> : Box<T> where T : Product
         _minProductWeight = minProductWeight;
     }
 
-    public override void AddProduct(T product)
+    public override void AddProduct(IEnumerable<Product> products)
     {
-        if (product.Weight < _minProductWeight)
+        if (products.Any(p => p.Weight < _minProductWeight))
         {
             throw new Exception("The product is too light");
         }
-
-        base.AddProduct(product);
     }
 }

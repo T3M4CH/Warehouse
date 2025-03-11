@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Warehouse.Data;
@@ -11,9 +12,11 @@ using Warehouse.Data;
 namespace Warehouse.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250310213312_Update")]
+    partial class Update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,9 +145,11 @@ namespace Warehouse.Data.Migrations
 
             modelBuilder.Entity("Warehouse.Entities.Product", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Container", null)
+                    b.HasOne("Warehouse.Entities.Container", "Container")
                         .WithMany("Products")
                         .HasForeignKey("ContainerId");
+
+                    b.Navigation("Container");
                 });
 
             modelBuilder.Entity("Warehouse.Entities.Animal", b =>

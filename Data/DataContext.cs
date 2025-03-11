@@ -17,15 +17,17 @@ public class DataContext : DbContext
 
         modelBuilder.Entity<Animal>().ToTable("Animals");
         modelBuilder.Entity<Food>().ToTable("Food");
-        modelBuilder.Entity<Cloth>().ToTable("Clothes");
+        modelBuilder.Entity<Clothes>().ToTable("Clothes");
 
         modelBuilder.Entity<Animal>().HasBaseType<Product>();
         modelBuilder.Entity<Food>().HasBaseType<Product>();
-        modelBuilder.Entity<Cloth>().HasBaseType<Product>();
+        modelBuilder.Entity<Clothes>().HasBaseType<Product>();
     }
 
     public DbSet<Product> Products { get; set; }
     public DbSet<Animal> Animals { get; set; }
-    public DbSet<Cloth> Clothes { get; set; }
+    public DbSet<Clothes> Clothes { get; set; }
     public DbSet<Food> Foods { get; set; }
+    public DbSet<Container> Containers { get; set; }
+    public DbSet<Warehouses> Warehouses { get; set; }
 }

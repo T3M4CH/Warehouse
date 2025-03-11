@@ -1,9 +1,13 @@
-﻿using Warehouse.Products;
+﻿using Warehouse.Entities;
 
 namespace Warehouse.Interfaces;
 
-public interface IContainerService<T> : IContainerBase where T : Product
+public interface IContainerService
 {
-    void AddProduct(T product);
-    T? GetProduct(int id); 
+    //Product GetProduct(int id);
+    void AddProduct(IEnumerable<Product> products);
+    // double GetTotalWeight();
+    // int GetCount();
+    // bool IsEmpty();
+    // IEnumerable<Product> GetProducts();
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Warehouse.Data;
@@ -11,9 +12,11 @@ using Warehouse.Data;
 namespace Warehouse.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250310182420_WarehousesContainers")]
+    partial class WarehousesContainers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,10 +42,10 @@ namespace Warehouse.Data.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("WarehouseId")
+                    b.Property<int>("WarehouseId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("WarehousesId")
+                    b.Property<int>("WarehousesId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -59,9 +62,6 @@ namespace Warehouse.Data.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Category")
-                        .HasColumnType("integer");
 
                     b.Property<int?>("ContainerId")
                         .HasColumnType("integer");
@@ -135,16 +135,20 @@ namespace Warehouse.Data.Migrations
                 {
                     b.HasOne("Warehouse.Entities.Warehouses", "Warehouses")
                         .WithMany("Containers")
-                        .HasForeignKey("WarehousesId");
+                        .HasForeignKey("WarehousesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Warehouses");
                 });
 
             modelBuilder.Entity("Warehouse.Entities.Product", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Container", null)
+                    b.HasOne("Warehouse.Entities.Container", "Container")
                         .WithMany("Products")
                         .HasForeignKey("ContainerId");
+
+                    b.Navigation("Container");
                 });
 
             modelBuilder.Entity("Warehouse.Entities.Animal", b =>

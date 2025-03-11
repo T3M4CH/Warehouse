@@ -2,14 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Warehouse.Data;
 using Warehouse.Entities;
-using Warehouse.Products;
+using Warehouse.Enums;
+using Clothes = Warehouse.Entities.Clothes;
 using Food = Warehouse.Entities.Food;
 
 namespace Warehouse.Controller;
 
-[ApiController]
-[Route("[controller]")]
-public class ProductsApiController : ControllerBase
+public class ProductsApiController : BaseApiController
 {
     private readonly DataContext _dataContext;
 
@@ -38,6 +37,7 @@ public class ProductsApiController : ControllerBase
                 Name = "Snake",
                 Weight = 50.0,
                 PassId = "1241x15125",
+                Category = EProductType.Animals
             },
 
             new()
@@ -45,24 +45,29 @@ public class ProductsApiController : ControllerBase
                 Name = "BigDawg",
                 Weight = 30.0,
                 PassId = "0x1241ad12",
+                Category = EProductType.Animals
             }
         };
 
         await _dataContext.Animals.AddRangeAsync(animals);
 
-        Cloth[] clothes =
+        Clothes[] clothes =
         {
             new()
             {
                 Name = "GucciGlasses",
                 Weight = 0.2,
-                Size = "M"
+                Size = "M",
+                Category = EProductType.Clothes
+
             },
             new()
             {
                 Name = "T-Shirt Stone Island",
                 Weight = 2.0,
-                Size = "XXXL"
+                Size = "XXXL",
+                Category = EProductType.Animals
+
             },
         };
 
@@ -75,6 +80,8 @@ public class ProductsApiController : ControllerBase
                 Name = "Snacks",
                 Weight = 0.5,
                 ExpiredData = new DateTime(2025, 3, 10).ToUniversalTime(),
+                Category = EProductType.Food
+
             },
 
             new()
@@ -82,6 +89,7 @@ public class ProductsApiController : ControllerBase
                 Name = "GodCheese",
                 Weight = 0.2,
                 ExpiredData = new DateTime(2025, 3, 15).ToUniversalTime(),
+                Category = EProductType.Food
             },
 
             new()
@@ -89,6 +97,7 @@ public class ProductsApiController : ControllerBase
                 Name = "ExpiredFood",
                 Weight = 0.2,
                 ExpiredData = new DateTime(2025, 2, 1).ToUniversalTime(),
+                Category = EProductType.Food
             },
         };
 

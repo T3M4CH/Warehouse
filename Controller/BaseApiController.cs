@@ -3,7 +3,7 @@
 namespace Warehouse.Controller;
 
 [ApiController]
-[Route("warehouse/[controller]")]
+[Route("api/[controller]")]
 public class BaseApiController : ControllerBase
 {
 }
