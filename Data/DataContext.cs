@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Warehouse.Entities;
 
 namespace Warehouse.Data;
 
-public class DataContext : DbContext
+public class DataContext : IdentityDbContext<IdentityUser>
 {
     public DataContext(DbContextOptions options) : base(options)
     {
@@ -29,5 +31,5 @@ public class DataContext : DbContext
     public DbSet<Clothes> Clothes { get; set; }
     public DbSet<Food> Foods { get; set; }
     public DbSet<Container> Containers { get; set; }
-    public DbSet<Warehouses> Warehouses { get; set; }
+    public DbSet<WarehouseApi.Entities.WarehouseEntity> Warehouses { get; set; }
 }

@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace Warehouse.DTOs;
 
-namespace Warehouse.DTOs;
-
-public class SendContainerDto
+public record SendContainerDto
 {
-    [Required] public int ContainerId { get; set; }
-    [Required] public int SenderWarehouseId { get; set; }
-    [Required] public int TargetWarehouseId { get; set; }
+    public required int ContainerId { get; set; }
+    public required int SenderWarehouseId { get; set; }
+    public required int TargetWarehouseId { get; set; }
 }

@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace Warehouse.DTOs;
 
-namespace Warehouse.DTOs;
-
-public class CreateWarehouseDto
+public record CreateWarehouseDto
 {
-    [Required] public string Location { get; set; } 
+    public required string Location { get; set; } 
 }

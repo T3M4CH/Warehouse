@@ -25,7 +25,7 @@ namespace Warehouse.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Warehouse.Entities.Container", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Container", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -55,7 +55,7 @@ namespace Warehouse.Data.Migrations
                     b.ToTable("Containers");
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Product", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -82,7 +82,7 @@ namespace Warehouse.Data.Migrations
                     b.UseTptMappingStrategy();
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Warehouses", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Warehouses", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,9 +99,9 @@ namespace Warehouse.Data.Migrations
                     b.ToTable("Warehouses");
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Animal", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Animal", b =>
                 {
-                    b.HasBaseType("Warehouse.Entities.Product");
+                    b.HasBaseType("WarehouseApi.Entities.Product");
 
                     b.Property<string>("PassId")
                         .IsRequired()
@@ -110,9 +110,9 @@ namespace Warehouse.Data.Migrations
                     b.ToTable("Animals", (string)null);
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Clothes", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Clothes", b =>
                 {
-                    b.HasBaseType("Warehouse.Entities.Product");
+                    b.HasBaseType("WarehouseApi.Entities.Product");
 
                     b.Property<string>("Size")
                         .IsRequired()
@@ -121,9 +121,9 @@ namespace Warehouse.Data.Migrations
                     b.ToTable("Clothes", (string)null);
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Food", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Food", b =>
                 {
-                    b.HasBaseType("Warehouse.Entities.Product");
+                    b.HasBaseType("WarehouseApi.Entities.Product");
 
                     b.Property<DateTime>("ExpiredData")
                         .HasColumnType("timestamp with time zone");
@@ -131,9 +131,9 @@ namespace Warehouse.Data.Migrations
                     b.ToTable("Food", (string)null);
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Container", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Container", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Warehouses", "Warehouses")
+                    b.HasOne("WarehouseApi.Entities.Warehouses", "Warehouses")
                         .WithMany("Containers")
                         .HasForeignKey("WarehousesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -142,48 +142,48 @@ namespace Warehouse.Data.Migrations
                     b.Navigation("Warehouses");
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Product", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Product", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Container", "Container")
+                    b.HasOne("WarehouseApi.Entities.Container", "Container")
                         .WithMany("Products")
                         .HasForeignKey("ContainerId");
 
                     b.Navigation("Container");
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Animal", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Animal", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Product", null)
+                    b.HasOne("WarehouseApi.Entities.Product", null)
                         .WithOne()
-                        .HasForeignKey("Warehouse.Entities.Animal", "Id")
+                        .HasForeignKey("WarehouseApi.Entities.Animal", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Clothes", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Clothes", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Product", null)
+                    b.HasOne("WarehouseApi.Entities.Product", null)
                         .WithOne()
-                        .HasForeignKey("Warehouse.Entities.Clothes", "Id")
+                        .HasForeignKey("WarehouseApi.Entities.Clothes", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Food", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Food", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Product", null)
+                    b.HasOne("WarehouseApi.Entities.Product", null)
                         .WithOne()
-                        .HasForeignKey("Warehouse.Entities.Food", "Id")
+                        .HasForeignKey("WarehouseApi.Entities.Food", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Container", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Container", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Warehouses", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Warehouses", b =>
                 {
                     b.Navigation("Containers");
                 });

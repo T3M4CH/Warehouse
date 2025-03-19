@@ -1,19 +1,13 @@
-﻿// See https://aka.ms/new-console-template for more information
-
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 using Warehouse.Data;
-
-//warehouse.AddContainer(animalsPallet);
-//warehouse.AddContainer(clothesBox);
-//warehouse.AddContainer(foodBox);
-
-//warehouse.SortContainersByWeight();
-
-//Console.WriteLine("Clothes < 2kg " + string.Join(',', warehouse.FilterProducts(product => product is Clothes { Weight: <= 2 }).Select(pr => pr.Name)));
-//Console.WriteLine("Not expired food " + string.Join(',', warehouse.FilterProducts(product => product is Food food && food.ExpireDate > DateTime.Now).Select(pr => pr.Name)));
-
-// ###
+using Warehouse.Entities;
+using Warehouse.Token;
+using Warehouse.Token.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,25 +17,65 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<DataContext>
     (options => options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 5;
+})
+.AddEntityFrameworkStores<DataContext>()
+.AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenKey"])),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true
+    };
+});
+
+builder.Services.AddAuthorization();
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.MapScalarApiReference();
-}
+app.MapOpenApi();
+app.MapScalarApiReference();
 
+app.UseCors(corsPolicyBuilder =>
+{
+    corsPolicyBuilder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+});
+
+app.UseDeveloperExceptionPage();
 app.MapGet("/", () => "Hello World");
 
 var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 
 var context = services.GetRequiredService<DataContext>();
-
 context.Database.Migrate();
 
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
+app.UseStaticFiles();
 //app.UseHttpsRedirection();
 
 app.Run();

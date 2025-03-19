@@ -6,7 +6,7 @@ public class WarehouseTests
     [Fact]
     public void TestTotalWeight()
     {
-        // _warehouseController = new Warehouse.Controller.WarehouseController();
+        // _warehouseController = new WarehouseApi.Controller.WarehouseController();
         //
         // var container = new Box<Food>(50);
         // container.AddProduct(new Food("Chips", 50.0, DateTime.Now));
@@ -17,7 +17,7 @@ public class WarehouseTests
     }
 
     [Fact]
-    public void TestOverweight()
+    public void AddProduct_WhenProductExitMaxWeight_ThrowException()
     {
         // var container = new Pallet<Animals>(50.0, 25.0);
         //
@@ -33,6 +33,7 @@ public class WarehouseTests
         //
         // Assert.NotNull(exception);
         // Assert.Equal("Container overweight", exception.Message);
+        // Assert.Throws<Exception>();
     }
 
     [Fact]
@@ -60,7 +61,7 @@ public class WarehouseTests
     [Fact]
     public void TestResultsFilter()
     {
-        // _warehouseController = new Warehouse.Controller.WarehouseController();
+        // _warehouseController = new WarehouseApi.Controller.WarehouseController();
         //
         // var container = new Box<Food>(50);
         // container.AddProduct(new Food("Chips", 20.0, DateTime.Now));

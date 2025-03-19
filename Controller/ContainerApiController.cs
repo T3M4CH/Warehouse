@@ -1,115 +1,88 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authorization;
 using Warehouse.Containers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Warehouse.Entities;
 using Warehouse.Data;
 using Warehouse.DTOs;
-using Warehouse.Entities;
 using Warehouse.Enums;
-using Warehouse.Helpers;
+using Warehouse.Services.Interfaces;
+using Warehouse.UnitOfWork.Interfaces;
 
 namespace Warehouse.Controller;
 
+[Route("v1/containers"), AllowAnonymous]
 public class ContainerApiController : BaseApiController
 {
-    private readonly DataContext _context;
+    private readonly IContainerService _containerService;
 
-    public ContainerApiController(DataContext context)
+    public ContainerApiController(IContainerService containerService)
     {
-        _context = context;
+        _containerService = containerService;
     }
 
-    [HttpPost("create-container")]
+    [HttpPost]
     public async Task<ActionResult> CreateContainer(CreateContainerDto containerDto)
     {
-        if (containerDto.WarehouseId.HasValue)
+        var result = await _containerService.CreateContainerAsync(containerDto);
+
+        if (result.IsSuccess)
         {
-            var warehouseExists = await _context.Warehouses.AnyAsync(w => w.Id == containerDto.WarehouseId.Value);
-            if (!warehouseExists)
-            {
-                return BadRequest($"Warehouse with ID {containerDto.WarehouseId.Value} does not exist.");
-            }
+            return CreatedAtAction(nameof(GetContainerById), new { id = result.Data.Id }, result.Data);
         }
 
-        var container = new Container()
-        {
-            MaxWeight = containerDto.MaxWeight,
-            Type = containerDto.Type,
-            Category = containerDto.Category,
-            WarehouseId = containerDto.WarehouseId
-        };
-
-        _context.Containers.Add(container);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetContainerById), new { id = container.Id }, container);
+        return BadRequest(result.ErrorMessage);
     }
 
-    [HttpGet("getcontainerbyid")]
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteContainer(int id)
+    {
+        var result = await _containerService.DeleteContainerAsync(id);
+
+        if (result.IsSuccess)
+        {
+            return NoContent();
+        }
+
+        return NotFound(result.ErrorMessage);
+    }
+
+    [HttpGet("{id}")]
     public async Task<ActionResult> GetContainerById(int id)
     {
-        var container = await _context.Containers.Include(c => c.Products).FirstOrDefaultAsync(c => c.Id == id);
-        if (container == null) return NotFound($"Container with ID {id} is not found");
-        return Ok(container);
+        var result = await _containerService.GetContainerByIdAsync(id);
+
+        if (result.IsSuccess)
+        {
+            return Ok(result.Data);
+        }
+
+        return NotFound(result.ErrorMessage);
     }
 
-    [HttpGet("get-all-containers")]
+    [HttpGet]
     public async Task<ActionResult> GetContainers()
     {
-        var containers = await _context.Containers.Include(c => c.Products).ToListAsync();
-        return Ok(containers);
+        var result = await _containerService.GetContainersAsync();
+
+        if (result.IsSuccess)
+        {
+            return Ok(result.Data);
+        }
+
+        return NotFound(result.ErrorMessage);
     }
 
-    [HttpPost("add-products")]
-    public async Task<IActionResult> AddProductsToContainer(AddProductsToContainerDto dto)
+    [HttpPost("{id}/products")]
+    public async Task<IActionResult> AddProducts(int id, AddProductsToContainerDto dto)
     {
-        var container = await _context.Containers
-            .FirstOrDefaultAsync(c => c.Id == dto.ContainerId);
+        var result = await _containerService.AddProductsToContainerAsync(id, dto);
 
-        if (container == null)
-            return NotFound($"Container with ID {dto.ContainerId} is not found");
-
-        var products = await _context.Products
-            .Where(p => dto.ProductIds.Contains(p.Id))
-            .ToListAsync();
-
-        var missingProducts = dto.ProductIds.Except(products.Select(p => p.Id)).ToList();
-        if (missingProducts.Any())
-            return BadRequest($"Products with ID {string.Join(", ", missingProducts)} not found.");
-
-        var differentProducts = products
-            .Where(p => dto.ProductIds.Contains(p.Id) && p.Category != container.Category).ToList();
-        if (differentProducts.Any())
-            return BadRequest($"{string.Join(", ", differentProducts.Select(x => $"{x.Name} - {x.Category}"))} is not the same category as the container {container.Category}.");
-
-        var productsFromOtherContainers = products
-            .Where(p => p.ContainerId != container.Id)
-            .ToList();
-
-        if (productsFromOtherContainers.Any())
+        if (result.IsSuccess)
         {
-            return BadRequest($"{string.Join(", ", productsFromOtherContainers)} placed on the other warehouse");
+            return Ok("Products were added to container");
         }
 
-        var containerBase = container.Type switch
-        {
-            EContainerType.Box => new Box(container.MaxWeight),
-            EContainerType.Pallet => new Pallet(container.MaxWeight, 25.0),
-            _ => throw new ArgumentOutOfRangeException()
-        };
-
-        products.AddRange(container.Products);
-        try
-        {
-            containerBase.AddProduct(products);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest($"Error with adding product " + ex.Message);
-        }
-
-        container.Products.AddRange(products);
-        await _context.SaveChangesAsync();
-
-        return Ok($"Products {string.Join(", ", products.Select(p => p.Id))} were added to container {container.Id}.");
+        return BadRequest(result.ErrorMessage);
     }
 }

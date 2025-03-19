@@ -25,7 +25,7 @@ namespace Warehouse.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Warehouse.Entities.Product", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,9 +54,9 @@ namespace Warehouse.Data.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Animal", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Animal", b =>
                 {
-                    b.HasBaseType("Warehouse.Entities.Product");
+                    b.HasBaseType("WarehouseApi.Entities.Product");
 
                     b.Property<string>("PassId")
                         .IsRequired()
@@ -65,9 +65,9 @@ namespace Warehouse.Data.Migrations
                     b.HasDiscriminator().HasValue("Animal");
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Cloth", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Cloth", b =>
                 {
-                    b.HasBaseType("Warehouse.Entities.Product");
+                    b.HasBaseType("WarehouseApi.Entities.Product");
 
                     b.Property<string>("Size")
                         .IsRequired()
@@ -76,9 +76,9 @@ namespace Warehouse.Data.Migrations
                     b.HasDiscriminator().HasValue("Cloth");
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Food", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Food", b =>
                 {
-                    b.HasBaseType("Warehouse.Entities.Product");
+                    b.HasBaseType("WarehouseApi.Entities.Product");
 
                     b.Property<DateTime>("ExpiredData")
                         .HasColumnType("timestamp with time zone");

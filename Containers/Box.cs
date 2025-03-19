@@ -1,14 +1,13 @@
 ﻿using Warehouse.Entities;
-using Warehouse.Interfaces;
 
 namespace Warehouse.Containers;
 
-public class Box : IContainerService
+public class Box
 {
     private const int Size = 10;
 
-    private int _currentSize;
-    private double _currentWeight;
+    //private int _currentSize;
+    //private double _currentWeight;
     private readonly double _maxWeight;
 
     public Box(double maxWeight)
@@ -27,7 +26,6 @@ public class Box : IContainerService
         {
             throw new Exception("Container's capacity end");
         }
-
     }
 
     // Product IContainerService<pRO>.GetProduct(int id)

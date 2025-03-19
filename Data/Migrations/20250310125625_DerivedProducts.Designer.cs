@@ -25,7 +25,7 @@ namespace Warehouse.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Warehouse.Entities.Product", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,9 +47,9 @@ namespace Warehouse.Data.Migrations
                     b.UseTptMappingStrategy();
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Animal", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Animal", b =>
                 {
-                    b.HasBaseType("Warehouse.Entities.Product");
+                    b.HasBaseType("WarehouseApi.Entities.Product");
 
                     b.Property<string>("PassId")
                         .IsRequired()
@@ -58,9 +58,9 @@ namespace Warehouse.Data.Migrations
                     b.ToTable("Animals", (string)null);
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Cloth", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Cloth", b =>
                 {
-                    b.HasBaseType("Warehouse.Entities.Product");
+                    b.HasBaseType("WarehouseApi.Entities.Product");
 
                     b.Property<string>("Size")
                         .IsRequired()
@@ -69,9 +69,9 @@ namespace Warehouse.Data.Migrations
                     b.ToTable("Clothes", (string)null);
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Food", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Food", b =>
                 {
-                    b.HasBaseType("Warehouse.Entities.Product");
+                    b.HasBaseType("WarehouseApi.Entities.Product");
 
                     b.Property<DateTime>("ExpiredData")
                         .HasColumnType("timestamp with time zone");
@@ -79,29 +79,29 @@ namespace Warehouse.Data.Migrations
                     b.ToTable("Food", (string)null);
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Animal", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Animal", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Product", null)
+                    b.HasOne("WarehouseApi.Entities.Product", null)
                         .WithOne()
-                        .HasForeignKey("Warehouse.Entities.Animal", "Id")
+                        .HasForeignKey("WarehouseApi.Entities.Animal", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Cloth", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Cloth", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Product", null)
+                    b.HasOne("WarehouseApi.Entities.Product", null)
                         .WithOne()
-                        .HasForeignKey("Warehouse.Entities.Cloth", "Id")
+                        .HasForeignKey("WarehouseApi.Entities.Cloth", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Food", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.Food", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Product", null)
+                    b.HasOne("WarehouseApi.Entities.Product", null)
                         .WithOne()
-                        .HasForeignKey("Warehouse.Entities.Food", "Id")
+                        .HasForeignKey("WarehouseApi.Entities.Food", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
