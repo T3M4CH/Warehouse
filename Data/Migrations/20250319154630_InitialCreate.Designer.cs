@@ -9,11 +9,11 @@ using Warehouse.Data;
 
 #nullable disable
 
-namespace Warehouse.Data.Migrations
+namespace WarehouseApi.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250318125456_asdas")]
-    partial class asdas
+    [Migration("20250319154630_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -221,7 +221,7 @@ namespace Warehouse.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Container", b =>
+            modelBuilder.Entity("Warehouse.Entities.Container", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -238,20 +238,20 @@ namespace Warehouse.Data.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("WarehouseId")
+                    b.Property<int?>("WarehouseEntityId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("WarehousesId")
+                    b.Property<int?>("WarehouseId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("WarehousesId");
+                    b.HasIndex("WarehouseEntityId");
 
                     b.ToTable("Containers");
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Product", b =>
+            modelBuilder.Entity("Warehouse.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -281,7 +281,7 @@ namespace Warehouse.Data.Migrations
                     b.UseTptMappingStrategy();
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Warehouses", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.WarehouseEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -303,9 +303,9 @@ namespace Warehouse.Data.Migrations
                     b.ToTable("Warehouses");
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Animal", b =>
+            modelBuilder.Entity("Warehouse.Entities.Animal", b =>
                 {
-                    b.HasBaseType("WarehouseApi.Entities.Product");
+                    b.HasBaseType("Warehouse.Entities.Product");
 
                     b.Property<string>("PassId")
                         .IsRequired()
@@ -314,9 +314,9 @@ namespace Warehouse.Data.Migrations
                     b.ToTable("Animals", (string)null);
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Clothes", b =>
+            modelBuilder.Entity("Warehouse.Entities.Clothes", b =>
                 {
-                    b.HasBaseType("WarehouseApi.Entities.Product");
+                    b.HasBaseType("Warehouse.Entities.Product");
 
                     b.Property<string>("Size")
                         .IsRequired()
@@ -325,9 +325,9 @@ namespace Warehouse.Data.Migrations
                     b.ToTable("Clothes", (string)null);
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Food", b =>
+            modelBuilder.Entity("Warehouse.Entities.Food", b =>
                 {
-                    b.HasBaseType("WarehouseApi.Entities.Product");
+                    b.HasBaseType("Warehouse.Entities.Product");
 
                     b.Property<DateTime>("ExpiredData")
                         .HasColumnType("timestamp with time zone");
@@ -386,21 +386,21 @@ namespace Warehouse.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Container", b =>
+            modelBuilder.Entity("Warehouse.Entities.Container", b =>
                 {
-                    b.HasOne("WarehouseApi.Entities.Warehouses", null)
+                    b.HasOne("WarehouseApi.Entities.WarehouseEntity", null)
                         .WithMany("Containers")
-                        .HasForeignKey("WarehousesId");
+                        .HasForeignKey("WarehouseEntityId");
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Product", b =>
+            modelBuilder.Entity("Warehouse.Entities.Product", b =>
                 {
-                    b.HasOne("WarehouseApi.Entities.Container", null)
+                    b.HasOne("Warehouse.Entities.Container", null)
                         .WithMany("Products")
                         .HasForeignKey("ContainerId");
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Warehouses", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.WarehouseEntity", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
@@ -409,39 +409,39 @@ namespace Warehouse.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Animal", b =>
+            modelBuilder.Entity("Warehouse.Entities.Animal", b =>
                 {
-                    b.HasOne("WarehouseApi.Entities.Product", null)
+                    b.HasOne("Warehouse.Entities.Product", null)
                         .WithOne()
-                        .HasForeignKey("WarehouseApi.Entities.Animal", "Id")
+                        .HasForeignKey("Warehouse.Entities.Animal", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Clothes", b =>
+            modelBuilder.Entity("Warehouse.Entities.Clothes", b =>
                 {
-                    b.HasOne("WarehouseApi.Entities.Product", null)
+                    b.HasOne("Warehouse.Entities.Product", null)
                         .WithOne()
-                        .HasForeignKey("WarehouseApi.Entities.Clothes", "Id")
+                        .HasForeignKey("Warehouse.Entities.Clothes", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Food", b =>
+            modelBuilder.Entity("Warehouse.Entities.Food", b =>
                 {
-                    b.HasOne("WarehouseApi.Entities.Product", null)
+                    b.HasOne("Warehouse.Entities.Product", null)
                         .WithOne()
-                        .HasForeignKey("WarehouseApi.Entities.Food", "Id")
+                        .HasForeignKey("Warehouse.Entities.Food", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Container", b =>
+            modelBuilder.Entity("Warehouse.Entities.Container", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.Warehouses", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.WarehouseEntity", b =>
                 {
                     b.Navigation("Containers");
                 });
