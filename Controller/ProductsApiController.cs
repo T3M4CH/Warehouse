@@ -88,7 +88,9 @@ public class ProductsApiController : BaseApiController
 
         if (result.IsSuccess)
         {
-            return Ok(_productService.GetProductsAsync());
+            var resultAsyncProducts = await _productService.GetProductsAsync();
+
+            return Ok(resultAsyncProducts.Data);
         }
 
         return BadRequest(result.ErrorMessage);

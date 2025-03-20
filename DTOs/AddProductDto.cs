@@ -12,5 +12,5 @@ public record AddProductDto
 
     public string? PassId { get; set; }
     public string? Size { get; set; }
-    public DateTime ExpiryDate { get; set; }
+    public DateTime? ExpiryDate { get; set; }
 }

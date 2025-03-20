@@ -49,7 +49,11 @@ public class ProductService : IProductService
         switch (product)
         {
             case Food food:
-                food.ExpiredData = productDto.ExpiryDate ?? food.ExpiredData;
+                if (productDto.ExpiryDate != null)
+                {
+                    food.ExpiredData = productDto.ExpiryDate.Value.ToUniversalTime();
+                }
+
                 break;
             case Animal animal:
                 animal.PassId = productDto.PassId ?? animal.PassId;
@@ -99,10 +103,10 @@ public class ProductService : IProductService
                 break;
 
             case EProductType.Food:
-                if (productDto.ExpiryDate == default)
+                if (!productDto.ExpiryDate.HasValue)
                     return OperationResult<Product>.Failure("Expiry date is required for food.");
 
-                if (productDto.ExpiryDate <= DateTime.UtcNow)
+                if (productDto.ExpiryDate.Value <= DateTime.UtcNow)
                     return OperationResult<Product>.Failure("Expiry date must be in the future.");
 
                 product = new Food
@@ -110,7 +114,7 @@ public class ProductService : IProductService
                     Name = productDto.Name,
                     Weight = productDto.Weight,
                     Category = productDto.Category,
-                    ExpiredData = productDto.ExpiryDate
+                    ExpiredData = productDto.ExpiryDate.Value.ToUniversalTime()
                 };
                 break;
 
