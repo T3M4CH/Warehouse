@@ -11,6 +11,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c833437-01d8-4e12-9622-04578da51576" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Helpers/ApplicationServiceExtension.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Helpers/MiddlewareExtension.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Helpers/MigrationExtension.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Warehouse/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Warehouse/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/ProductsApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/ProductsApiController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DTOs/AddProductDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DTOs/AddProductDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250310125019_InitialCreate.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250310125019_InitialCreate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250310125625_DerivedProducts.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250310125625_DerivedProducts.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250310182420_WarehousesContainers.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250310182420_WarehousesContainers.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250310185152_ContainersUpdate.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250310185152_ContainersUpdate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250310213312_Update.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250310213312_Update.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250310215114_NewUpdate.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250310215114_NewUpdate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250311111124_UpdateWarehouses.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250311111124_UpdateWarehouses.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250317135448_Users.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250317135448_Users.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250318112735_userwarehouse.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250318112735_userwarehouse.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250318125108_asd.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250318125108_asd.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250318125456_asdas.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250318125456_asdas.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250319091840_testMigration.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250319091840_testMigration.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/DataContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/ProductService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/ProductService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WarehouseApi.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WarehouseApi.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Warehouse/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Warehouse/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Token/TokenService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Token/TokenService.cs" afterDir="false" />
@@ -22,6 +57,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="XML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -198,5 +240,50 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Controller/ProductsApiController.cs</url>
+          <line>86</line>
+          <properties documentPath="C:\Games\WarehouseGit\WarehouseApi\Controller\ProductsApiController.cs" initialLine="86" containingFunctionPresentation="Method 'AddTestProducts'">
+            <startOffsets>
+              <option value="2179" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2232" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Controller/ProductsApiController.cs</url>
+          <line>47</line>
+          <properties documentPath="C:\Games\WarehouseGit\WarehouseApi\Controller\ProductsApiController.cs" initialLine="47" containingFunctionPresentation="Method 'AddProduct'">
+            <startOffsets>
+              <option value="1238" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1296" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Controller/WarehouseController.cs</url>
+          <line>73</line>
+          <properties documentPath="C:\Games\WarehouseGit\WarehouseApi\Controller\WarehouseController.cs" initialLine="73" containingFunctionPresentation="Method 'SendContainer'">
+            <startOffsets>
+              <option value="2508" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2509" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

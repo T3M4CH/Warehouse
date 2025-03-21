@@ -8,7 +8,7 @@ using Warehouse.Data;
 
 #nullable disable
 
-namespace Warehouse.Data.Migrations
+namespace WarehouseApi.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -235,12 +235,15 @@ namespace Warehouse.Data.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("WarehouseEntityId")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("WarehouseId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("WarehouseId");
+                    b.HasIndex("WarehouseEntityId");
 
                     b.ToTable("Containers");
                 });
@@ -275,7 +278,7 @@ namespace Warehouse.Data.Migrations
                     b.UseTptMappingStrategy();
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Warehouse", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.WarehouseEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -382,9 +385,9 @@ namespace Warehouse.Data.Migrations
 
             modelBuilder.Entity("Warehouse.Entities.Container", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Warehouse", null)
+                    b.HasOne("WarehouseApi.Entities.WarehouseEntity", null)
                         .WithMany("Containers")
-                        .HasForeignKey("WarehouseId");
+                        .HasForeignKey("WarehouseEntityId");
                 });
 
             modelBuilder.Entity("Warehouse.Entities.Product", b =>
@@ -394,7 +397,7 @@ namespace Warehouse.Data.Migrations
                         .HasForeignKey("ContainerId");
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Warehouse", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.WarehouseEntity", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
@@ -435,7 +438,7 @@ namespace Warehouse.Data.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Warehouse", b =>
+            modelBuilder.Entity("WarehouseApi.Entities.WarehouseEntity", b =>
                 {
                     b.Navigation("Containers");
                 });

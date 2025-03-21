@@ -21,6 +21,9 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="NLog" Version="5.4.0" />
+      <PackageReference Include="NLog.Extensions.Logging" Version="5.4.0" />
+      <PackageReference Include="NLog.Web.AspNetCore" Version="5.4.0" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.2" />
       <PackageReference Include="Scalar.AspNetCore" Version="2.0.26" />
       <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.0.2" />
@@ -34,6 +37,10 @@
 
     <ItemGroup>
       <Folder Include="UnitTests\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="logs\" />
     </ItemGroup>
 
 </Project>
