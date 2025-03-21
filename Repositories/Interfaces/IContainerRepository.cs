@@ -9,6 +9,4 @@ public interface IContainerRepository
     Task<List<Container>> GetContainersWithProductsAsync();
     Task AddAsync(Container container);
     Task RemoveAsync(Container container);
-    Task<bool> ExistsAsync(int id);
-    Task AddProductsAsync(int containerId, ICollection<int> productIds);
 }
