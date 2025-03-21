@@ -13,7 +13,8 @@ public class TokenService : ITokenService
     public TokenService(IConfiguration configuration)
     {
         Console.WriteLine(configuration["TokenKey"]);
-        _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenKey"] ?? string.Empty));
+        //todo : ошибка
+        _securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["TokenKey"]));
     }
 
     private readonly SymmetricSecurityKey _securityKey;

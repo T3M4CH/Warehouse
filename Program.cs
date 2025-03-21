@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 using Warehouse.Data;
-using Warehouse.Entities;
 using Warehouse.Services;
 using Warehouse.Services.Interfaces;
 using Warehouse.Token;
