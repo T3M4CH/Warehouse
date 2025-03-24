@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Warehouse.DTOs;
-using Warehouse.Entities;
 using Warehouse.Token.Interfaces;
+using WarehouseApi.Entities;
 
 namespace Warehouse.Controller;
 
@@ -11,11 +11,11 @@ namespace Warehouse.Controller;
 [Route("v1/users")]
 public class UserApiController : BaseApiController
 {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly UserManager<UserEntity> _userManager;
+    private readonly SignInManager<UserEntity> _signInManager;
     private readonly ITokenService _tokenService;
 
-    public UserApiController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ITokenService tokenService)
+    public UserApiController(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager, ITokenService tokenService)
     {
         _userManager = userManager;
         _tokenService = tokenService;
@@ -25,7 +25,7 @@ public class UserApiController : BaseApiController
     [HttpPost("create"), AllowAnonymous]
     public async Task<ActionResult> Register(RegisterDto registerDto)
     {
-        var user = new IdentityUser
+        var user = new UserEntity()
         {
             UserName = registerDto.UserName,
         };

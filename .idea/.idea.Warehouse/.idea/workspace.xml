@@ -11,33 +11,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c833437-01d8-4e12-9622-04578da51576" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Entities/UserEntity.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/Interfaces/IWarehouseService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/WarehouseService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Warehouse/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Warehouse/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Containers/Box.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Containers/Box.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Containers/Pallet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Containers/Pallet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/ProductsApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/ProductsApiController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controller/WarehouseController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/WarehouseController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/DataContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/DataContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entities/Animal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/AnimalEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entities/Clothes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/ClothesEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entities/Container.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/ContainerEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entities/Food.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/FoodEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entities/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/ProductEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entities/UserWarehouse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/UserWarehouseEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controller/UserApiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controller/UserApiController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250319154630_InitialCreate.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/20250319154630_InitialCreate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Migrations/DataContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entities/UserEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/UserEntity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Entities/WarehouseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Entities/WarehouseEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helpers/OperationResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helpers/OperationResult.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repositories/ContainerRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/ContainerRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repositories/Interfaces/IContainerRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/Interfaces/IContainerRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repositories/Interfaces/IProductRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/Interfaces/IProductRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repositories/Interfaces/IWarehouseRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/Interfaces/IWarehouseRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repositories/ProductRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/ProductRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helpers/ApplicationServiceExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helpers/ApplicationServiceExtension.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Repositories/WarehouseRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/WarehouseRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/ContainerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/ContainerService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/Interfaces/IContainerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Interfaces/IContainerService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/Interfaces/IProductService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/Interfaces/IProductService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/ProductService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/ProductService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,13 +39,14 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../UnitTests/UnitTest1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Controller/WarehouseController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Entities/Clothes.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Entities/ClothesEntity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Properties/launchSettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Repositories/Interfaces/IWarehouseRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/global.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/533e65d7e1d3ab33a791a6bb1a1ecf0d06cc9b38761b9465fc6c2554a77ecb6/MvcServiceCollectionExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5e14a4e27990972fa4ae94975603bd298aaf328ee083c03b10569ee4724d57/TestInvoker.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -218,7 +201,7 @@
       <workItem from="1742376241589" duration="11674000" />
       <workItem from="1742470290660" duration="1593000" />
       <workItem from="1742578395191" duration="3289000" />
-      <workItem from="1742811591747" duration="9625000" />
+      <workItem from="1742811591747" duration="12585000" />
     </task>
     <servers />
   </component>
@@ -269,19 +252,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Repositories/WarehouseRepository.cs</url>
-          <line>52</line>
-          <properties documentPath="C:\Games\WarehouseGit\WarehouseApi\Repositories\WarehouseRepository.cs" initialLine="38" containingFunctionPresentation="Method 'CreateWarehouse'">
-            <startOffsets>
-              <option value="1494" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1516" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

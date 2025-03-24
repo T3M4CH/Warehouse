@@ -10,6 +10,7 @@ using Warehouse.Services.Interfaces;
 using Warehouse.Token;
 using Warehouse.Token.Interfaces;
 using Warehouse.UnitOfWork.Interfaces;
+using WarehouseApi.Entities;
 using WarehouseApi.Repositories;
 using WarehouseApi.Repositories.Interfaces;
 
@@ -23,7 +24,7 @@ public static class ApplicationServiceExtension
         builder.Services.AddDbContext<DataContext>
             (options => options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
 
-        builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+        builder.Services.AddIdentity<UserEntity, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -61,6 +62,7 @@ public static class ApplicationServiceExtension
         builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>();
         builder.Services.AddScoped<IContainerService, ContainerService>();
         builder.Services.AddScoped<IProductService, ProductService>();
+        builder.Services.AddScoped<IWarehouseService, WarehouseService>();
         
         builder.Logging.ClearProviders(); 
         builder.Host.UseNLog(); 

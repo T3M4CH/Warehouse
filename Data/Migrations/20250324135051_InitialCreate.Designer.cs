@@ -12,7 +12,7 @@ using Warehouse.Data;
 namespace WarehouseApi.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250319154630_InitialCreate")]
+    [Migration("20250324135051_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -74,70 +74,6 @@ namespace WarehouseApi.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
-
-                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -221,7 +157,7 @@ namespace WarehouseApi.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Container", b =>
+            modelBuilder.Entity("Warehouse.Entities.ContainerEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -251,7 +187,7 @@ namespace WarehouseApi.Data.Migrations
                     b.ToTable("Containers");
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Product", b =>
+            modelBuilder.Entity("Warehouse.Entities.ProductEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -281,6 +217,85 @@ namespace WarehouseApi.Data.Migrations
                     b.UseTptMappingStrategy();
                 });
 
+            modelBuilder.Entity("Warehouse.Entities.UserWarehouseEntity", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.Property<int>("WarehouseId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("UserId", "WarehouseId");
+
+                    b.HasIndex("WarehouseId");
+
+                    b.ToTable("UserWarehouses");
+                });
+
+            modelBuilder.Entity("WarehouseApi.Entities.UserEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
             modelBuilder.Entity("WarehouseApi.Entities.WarehouseEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -293,19 +308,14 @@ namespace WarehouseApi.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Warehouses");
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Animal", b =>
+            modelBuilder.Entity("Warehouse.Entities.AnimalEntity", b =>
                 {
-                    b.HasBaseType("Warehouse.Entities.Product");
+                    b.HasBaseType("Warehouse.Entities.ProductEntity");
 
                     b.Property<string>("PassId")
                         .IsRequired()
@@ -314,9 +324,9 @@ namespace WarehouseApi.Data.Migrations
                     b.ToTable("Animals", (string)null);
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Clothes", b =>
+            modelBuilder.Entity("Warehouse.Entities.ClothesEntity", b =>
                 {
-                    b.HasBaseType("Warehouse.Entities.Product");
+                    b.HasBaseType("Warehouse.Entities.ProductEntity");
 
                     b.Property<string>("Size")
                         .IsRequired()
@@ -325,9 +335,9 @@ namespace WarehouseApi.Data.Migrations
                     b.ToTable("Clothes", (string)null);
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Food", b =>
+            modelBuilder.Entity("Warehouse.Entities.FoodEntity", b =>
                 {
-                    b.HasBaseType("Warehouse.Entities.Product");
+                    b.HasBaseType("Warehouse.Entities.ProductEntity");
 
                     b.Property<DateTime>("ExpiredData")
                         .HasColumnType("timestamp with time zone");
@@ -346,7 +356,7 @@ namespace WarehouseApi.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("WarehouseApi.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -355,7 +365,7 @@ namespace WarehouseApi.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("WarehouseApi.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -370,7 +380,7 @@ namespace WarehouseApi.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("WarehouseApi.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -379,71 +389,92 @@ namespace WarehouseApi.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("WarehouseApi.Entities.UserEntity", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Container", b =>
+            modelBuilder.Entity("Warehouse.Entities.ContainerEntity", b =>
                 {
-                    b.HasOne("WarehouseApi.Entities.WarehouseEntity", null)
+                    b.HasOne("WarehouseApi.Entities.WarehouseEntity", "WarehouseEntity")
                         .WithMany("Containers")
                         .HasForeignKey("WarehouseEntityId");
+
+                    b.Navigation("WarehouseEntity");
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Product", b =>
+            modelBuilder.Entity("Warehouse.Entities.ProductEntity", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Container", null)
+                    b.HasOne("Warehouse.Entities.ContainerEntity", "Container")
                         .WithMany("Products")
                         .HasForeignKey("ContainerId");
+
+                    b.Navigation("Container");
                 });
 
-            modelBuilder.Entity("WarehouseApi.Entities.WarehouseEntity", b =>
+            modelBuilder.Entity("Warehouse.Entities.UserWarehouseEntity", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.HasOne("WarehouseApi.Entities.UserEntity", "User")
+                        .WithMany("UserWarehouses")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WarehouseApi.Entities.WarehouseEntity", "WarehouseEntity")
+                        .WithMany("UserWarehouses")
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
+
+                    b.Navigation("WarehouseEntity");
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Animal", b =>
+            modelBuilder.Entity("Warehouse.Entities.AnimalEntity", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Product", null)
+                    b.HasOne("Warehouse.Entities.ProductEntity", null)
                         .WithOne()
-                        .HasForeignKey("Warehouse.Entities.Animal", "Id")
+                        .HasForeignKey("Warehouse.Entities.AnimalEntity", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Clothes", b =>
+            modelBuilder.Entity("Warehouse.Entities.ClothesEntity", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Product", null)
+                    b.HasOne("Warehouse.Entities.ProductEntity", null)
                         .WithOne()
-                        .HasForeignKey("Warehouse.Entities.Clothes", "Id")
+                        .HasForeignKey("Warehouse.Entities.ClothesEntity", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Food", b =>
+            modelBuilder.Entity("Warehouse.Entities.FoodEntity", b =>
                 {
-                    b.HasOne("Warehouse.Entities.Product", null)
+                    b.HasOne("Warehouse.Entities.ProductEntity", null)
                         .WithOne()
-                        .HasForeignKey("Warehouse.Entities.Food", "Id")
+                        .HasForeignKey("Warehouse.Entities.FoodEntity", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Warehouse.Entities.Container", b =>
+            modelBuilder.Entity("Warehouse.Entities.ContainerEntity", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("WarehouseApi.Entities.UserEntity", b =>
+                {
+                    b.Navigation("UserWarehouses");
                 });
 
             modelBuilder.Entity("WarehouseApi.Entities.WarehouseEntity", b =>
                 {
                     b.Navigation("Containers");
+
+                    b.Navigation("UserWarehouses");
                 });
 #pragma warning restore 612, 618
         }

@@ -50,13 +50,31 @@ public class WarehouseRepository : IWarehouseRepository
 
     public async Task<WarehouseEntity> CreateWarehouse(WarehouseEntity warehouse, string userId)
     {
-        var id = warehouse.Id;
-        await _context.Warehouses.AddAsync(warehouse);
+        await using var transaction = await _context.Database.BeginTransactionAsync();
 
-        id = warehouse.Id;
-        await _context.UserWarehouses.AddAsync(new UserWarehouseEntity { UserId = userId, WarehouseId = warehouse.Id });
+        try
+        {
+            await _context.Warehouses.AddAsync(warehouse);
 
-        return warehouse;
+            await _context.SaveChangesAsync();
+
+            await _context.UserWarehouses.AddAsync(new UserWarehouseEntity
+            {
+                UserId = userId,
+                WarehouseId = warehouse.Id
+            });
+            
+            await _context.SaveChangesAsync();
+
+            await transaction.CommitAsync();
+
+            return warehouse;
+        }
+        catch (Exception)
+        {
+            await transaction.RollbackAsync();
+            throw;
+        }
     }
 
     public async Task AddAsync(WarehouseEntity warehouse)
