@@ -1,6 +1,6 @@
 ﻿namespace Warehouse.Entities;
 
-public class Clothes : Product
+public class ClothesEntity : ProductEntity
 {
     public required string Size { get; set; }
 }

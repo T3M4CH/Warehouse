@@ -20,32 +20,32 @@ public class ProductRepository : IProductRepository
         return await _dataContext.Products.AnyAsync();
     }
 
-    public async Task AddProduct(Product product)
+    public async Task AddProduct(ProductEntity productEntity)
     {
-        await _dataContext.Products.AddAsync(product);
+        await _dataContext.Products.AddAsync(productEntity);
     }
 
-    public async Task<IEnumerable<Product>> GetProductsAsync()
+    public async Task<IEnumerable<ProductEntity>> GetProductsAsync()
     {
         return await _dataContext.Products.ToListAsync();
     }
 
-    public async Task<Product?> GetProductByIdAsync(int id)
+    public async Task<ProductEntity?> GetProductByIdAsync(int id)
     {
         return await _dataContext.Products.FindAsync(id);
     }
 
-    public void RemoveProduct(Product product)
+    public void RemoveProduct(ProductEntity productEntity)
     {
-        _dataContext.Products.Remove(product);
+        _dataContext.Products.Remove(productEntity);
     }
 
-    public async Task AddProducts(IEnumerable<Product> products)
+    public async Task AddProducts(IEnumerable<ProductEntity> products)
     {
         products = products.ToList();
-        var animals = products.OfType<Animal>().ToList();
-        var foods = products.OfType<Food>().ToList();
-        var clothes = products.OfType<Clothes>().ToList();
+        var animals = products.OfType<AnimalEntity>().ToList();
+        var foods = products.OfType<FoodEntity>().ToList();
+        var clothes = products.OfType<ClothesEntity>().ToList();
 
         if (animals.Any())
         {
@@ -63,7 +63,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async Task<List<Product>> GetProductsListByIdsAsync(ICollection<int> dtoProductIds)
+    public async Task<List<ProductEntity>> GetProductsListByIdsAsync(ICollection<int> dtoProductIds)
     {
         return await _dataContext.Products.Where(p => dtoProductIds.Contains(p.Id)).ToListAsync();
     }

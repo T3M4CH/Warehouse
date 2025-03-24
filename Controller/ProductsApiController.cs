@@ -6,8 +6,6 @@ using Warehouse.DTOs;
 using Warehouse.Entities;
 using Warehouse.Enums;
 using Warehouse.Services.Interfaces;
-using Clothes = Warehouse.Entities.Clothes;
-using Food = Warehouse.Entities.Food;
 
 namespace Warehouse.Controller;
 

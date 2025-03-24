@@ -11,7 +11,7 @@ public class Pallet : Box
         _minProductWeight = minProductWeight;
     }
 
-    public override void AddProduct(IEnumerable<Product> products)
+    public override void AddProduct(IEnumerable<ProductEntity> products)
     {
         if (products.Any(p => p.Weight < _minProductWeight))
         {

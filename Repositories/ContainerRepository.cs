@@ -15,39 +15,29 @@ public class ContainerRepository : IContainerRepository
         _dataContext = dataContext;
     }
 
-    public async Task<Container?> GetByIdAsync(int id)
+    public async Task<ContainerEntity?> GetByIdAsync(int id)
     {
         return await _dataContext.Containers.Include(c => c.Products).FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public async Task<IEnumerable<Container>> GetByWarehouseIdAsync(int warehouseId)
+    public async Task<IEnumerable<ContainerEntity>> GetByWarehouseIdAsync(int warehouseId)
     {
         return await _dataContext.Containers.Where(c => c.WarehouseId == warehouseId).ToListAsync();
     }
 
-    public async Task<List<Container>> GetContainersWithProductsAsync()
+    public async Task<List<ContainerEntity>> GetContainersWithProductsAsync()
     {
         return await _dataContext.Containers.Include(c => c.Products).ToListAsync();
     }
 
-    public async Task AddAsync(Container container)
+    public async Task AddAsync(ContainerEntity containerEntity)
     {
-        await _dataContext.Containers.AddAsync(container);
+        await _dataContext.Containers.AddAsync(containerEntity);
     }
 
-    public async Task RemoveAsync(Container container)
+    public async Task RemoveAsync(ContainerEntity containerEntity)
     {
-        _dataContext.Containers.Remove(container);
+        _dataContext.Containers.Remove(containerEntity);
         await _dataContext.SaveChangesAsync();
-    }
-
-    public async Task<bool> ExistsAsync(int id)
-    {
-        return await _dataContext.Containers.AnyAsync(c => c.Id == id);
-    }
-
-    public Task AddProductsAsync(int containerId, ICollection<int> productIds)
-    {
-        return null;
     }
 }

@@ -6,10 +6,10 @@ namespace WarehouseApi.Repositories.Interfaces;
 public interface IProductRepository
 {
     Task<bool> AnyAsync();
-    Task AddProduct(Product product);
-    Task<IEnumerable<Product>> GetProductsAsync();
-    Task<Product?> GetProductByIdAsync(int id);
-    void RemoveProduct(Product product);
-    Task AddProducts(IEnumerable<Product> products);
-    Task<List<Product>> GetProductsListByIdsAsync(ICollection<int> dtoProductIds);
+    Task AddProduct(ProductEntity productEntity);
+    Task<IEnumerable<ProductEntity>> GetProductsAsync();
+    Task<ProductEntity?> GetProductByIdAsync(int id);
+    void RemoveProduct(ProductEntity productEntity);
+    Task AddProducts(IEnumerable<ProductEntity> products);
+    Task<List<ProductEntity>> GetProductsListByIdsAsync(ICollection<int> dtoProductIds);
 }

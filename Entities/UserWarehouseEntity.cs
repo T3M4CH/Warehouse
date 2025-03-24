@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using WarehouseApi.Entities;
 
 namespace Warehouse.Entities;
 
-public record UserWarehouse
+public record UserWarehouseEntity
 {
     public required string UserId { get; set; }
-    public IdentityUser User { get; set; }
+    public UserEntity? User { get; set; }
 
     public int WarehouseId { get; set; }
-    public WarehouseApi.Entities.WarehouseEntity WarehouseEntity { get; set; }
+    public WarehouseEntity? WarehouseEntity { get; set; }
 }

@@ -6,11 +6,11 @@ namespace Warehouse.Services.Interfaces;
 
 public interface IProductService
 {
-    Task<OperationResult<IEnumerable<Product>>> GetProductsAsync();
-    Task<OperationResult<Product?>> GetProductsByIdAsync(int id);
-    Task<OperationResult<Product?>> UpdateProduct(int id, UpdateProductDto productDto);
+    Task<OperationResult<IEnumerable<ProductEntity>>> GetProductsAsync();
+    Task<OperationResult<ProductEntity?>> GetProductsByIdAsync(int id);
+    Task<OperationResult<ProductEntity?>> UpdateProduct(int id, UpdateProductDto productDto);
 
-    Task<OperationResult<Product>> AddProduct(AddProductDto productDto);
+    Task<OperationResult<ProductEntity>> AddProduct(AddProductDto productDto);
 
     Task<OperationResult> RemoveProduct(int id);
 

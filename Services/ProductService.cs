@@ -19,68 +19,68 @@ public class ProductService : IProductService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<OperationResult<IEnumerable<Product>>> GetProductsAsync()
+    public async Task<OperationResult<IEnumerable<ProductEntity>>> GetProductsAsync()
     {
         var products = await _unitOfWork.ProductRepository.GetProductsAsync();
-        return OperationResult<IEnumerable<Product>>.Success(products);
+        return OperationResult<IEnumerable<ProductEntity>>.Success(products);
     }
 
-    public async Task<OperationResult<Product?>> GetProductsByIdAsync(int id)
+    public async Task<OperationResult<ProductEntity?>> GetProductsByIdAsync(int id)
     {
         var product = await _unitOfWork.ProductRepository.GetProductByIdAsync(id);
 
         if (product == null)
         {
-            return OperationResult<Product?>.Failure("Not found product with ID " + id);
+            return OperationResult<ProductEntity?>.Failure("Not found product with ID " + id);
         }
 
-        return OperationResult<Product?>.Success(product);
+        return OperationResult<ProductEntity?>.Success(product);
     }
 
-    public async Task<OperationResult<Product?>> UpdateProduct(int id, UpdateProductDto productDto)
+    public async Task<OperationResult<ProductEntity?>> UpdateProduct(int id, UpdateProductDto productDto)
     {
         var product = await _unitOfWork.ProductRepository.GetProductByIdAsync(id);
 
-        if (product == null) return OperationResult<Product?>.Failure($"Product with ID {id} not found");
+        if (product == null) return OperationResult<ProductEntity?>.Failure($"Product with ID {id} not found");
 
         product.Name = productDto.Name ?? product.Name;
         product.Weight = productDto.Weight ?? product.Weight;
 
         switch (product)
         {
-            case Food food:
+            case FoodEntity food:
                 if (productDto.ExpiryDate != null)
                 {
                     food.ExpiredData = productDto.ExpiryDate.Value.ToUniversalTime();
                 }
 
                 break;
-            case Animal animal:
+            case AnimalEntity animal:
                 animal.PassId = productDto.PassId ?? animal.PassId;
                 break;
-            case Clothes clothes:
+            case ClothesEntity clothes:
                 clothes.Size = productDto.Size ?? clothes.Size;
                 break;
             default:
-                return OperationResult<Product?>.Failure("Invalid product category.");
+                return OperationResult<ProductEntity?>.Failure("Invalid product category.");
         }
 
         await _unitOfWork.CommitAsync();
 
-        return OperationResult<Product?>.Success(product);
+        return OperationResult<ProductEntity?>.Success(product);
     }
 
-    public async Task<OperationResult<Product>> AddProduct(AddProductDto productDto)
+    public async Task<OperationResult<ProductEntity>> AddProduct(AddProductDto productDto)
     {
-        Product product;
+        ProductEntity productEntity;
 
         switch (productDto.Category)
         {
             case EProductType.Animals:
                 if (string.IsNullOrWhiteSpace(productDto.PassId))
-                    return OperationResult<Product>.Failure("PassId is required for animals.");
+                    return OperationResult<ProductEntity>.Failure("PassId is required for animals.");
 
-                product = new Animal
+                productEntity = new AnimalEntity
                 {
                     Name = productDto.Name,
                     Weight = productDto.Weight,
@@ -91,9 +91,9 @@ public class ProductService : IProductService
 
             case EProductType.Clothes:
                 if (string.IsNullOrWhiteSpace(productDto.Size))
-                    return OperationResult<Product>.Failure("Size is required for clothes.");
+                    return OperationResult<ProductEntity>.Failure("Size is required for clothes.");
 
-                product = new Clothes
+                productEntity = new ClothesEntity
                 {
                     Name = productDto.Name,
                     Weight = productDto.Weight,
@@ -104,12 +104,12 @@ public class ProductService : IProductService
 
             case EProductType.Food:
                 if (!productDto.ExpiryDate.HasValue)
-                    return OperationResult<Product>.Failure("Expiry date is required for food.");
+                    return OperationResult<ProductEntity>.Failure("Expiry date is required for food.");
 
                 if (productDto.ExpiryDate.Value <= DateTime.UtcNow)
-                    return OperationResult<Product>.Failure("Expiry date must be in the future.");
+                    return OperationResult<ProductEntity>.Failure("Expiry date must be in the future.");
 
-                product = new Food
+                productEntity = new FoodEntity
                 {
                     Name = productDto.Name,
                     Weight = productDto.Weight,
@@ -119,13 +119,13 @@ public class ProductService : IProductService
                 break;
 
             default:
-                return OperationResult<Product>.Failure("Invalid category.");
+                return OperationResult<ProductEntity>.Failure("Invalid category.");
         }
 
-        await _unitOfWork.ProductRepository.AddProduct(product);
+        await _unitOfWork.ProductRepository.AddProduct(productEntity);
         await _unitOfWork.CommitAsync();
 
-        return OperationResult<Product>.Success(product);
+        return OperationResult<ProductEntity>.Success(productEntity);
     }
 
     public async Task<OperationResult> RemoveProduct(int id)
@@ -145,7 +145,7 @@ public class ProductService : IProductService
     {
         if (await _unitOfWork.ProductRepository.AnyAsync()) return OperationResult.Failure("Already added");
 
-        Animal[] animals =
+        AnimalEntity[] animals =
         {
             new()
             {
@@ -164,7 +164,7 @@ public class ProductService : IProductService
             }
         };
 
-        Clothes[] clothes =
+        ClothesEntity[] clothes =
         {
             new()
             {
@@ -182,7 +182,7 @@ public class ProductService : IProductService
             },
         };
 
-        Food[] foods =
+        FoodEntity[] foods =
         {
             new()
             {
@@ -209,7 +209,7 @@ public class ProductService : IProductService
             },
         };
 
-        var products = animals.Cast<Product>().Concat(clothes).Concat(foods);
+        var products = animals.Cast<ProductEntity>().Concat(clothes).Concat(foods);
 
         await _unitOfWork.ProductRepository.AddProducts(products);
         await _unitOfWork.CommitAsync();

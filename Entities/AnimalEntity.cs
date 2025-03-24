@@ -1,6 +1,6 @@
 ﻿namespace Warehouse.Entities;
 
-public class Animal : Product
+public class AnimalEntity : ProductEntity
 {
     public required string PassId { get; set; }
 }

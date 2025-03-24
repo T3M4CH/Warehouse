@@ -1,6 +1,6 @@
 ﻿namespace Warehouse.Entities;
 
-public class Food : Product
+public class FoodEntity : ProductEntity
 {
     public DateTime ExpiredData { get; set; }
 }

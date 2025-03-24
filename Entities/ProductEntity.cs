@@ -2,7 +2,7 @@
 
 namespace Warehouse.Entities;
 
-public abstract class Product
+public abstract class ProductEntity
 {
     public int Id { get; set; }
     public required string Name { get; set; }
@@ -11,4 +11,5 @@ public abstract class Product
     public EProductType Category { get; set; }
 
     public int? ContainerId { get; set; }
+    public ContainerEntity? Container { get; set; }
 }

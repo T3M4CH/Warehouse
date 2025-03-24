@@ -15,7 +15,7 @@ public class Box
         _maxWeight = maxWeight;
     }
 
-    public virtual void AddProduct(IEnumerable<Product> products)
+    public virtual void AddProduct(IEnumerable<ProductEntity> products)
     {
         if (GetTotalWeight(products) > _maxWeight)
         {
@@ -47,5 +47,5 @@ public class Box
     //
     // public IEnumerable<Product> GetProducts() => _products;
 
-    public double GetTotalWeight(IEnumerable<Product> products) => products.Sum(product => product.Weight);
+    public double GetTotalWeight(IEnumerable<ProductEntity> products) => products.Sum(product => product.Weight);
 }

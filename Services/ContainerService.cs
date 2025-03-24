@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Http.HttpResults;
 using Warehouse.Containers;
 using Warehouse.DTOs;
 using Warehouse.Entities;
@@ -18,16 +17,16 @@ public class ContainerService : IContainerService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<OperationResult<Container?>> CreateContainerAsync(CreateContainerDto containerDto)
+    public async Task<OperationResult<ContainerEntity?>> CreateContainerAsync(CreateContainerDto containerDto)
     {
         if (containerDto.WarehouseId.HasValue)
         {
             var warehouseExists = await _unitOfWork.WarehouseRepository.ExistByIdAsync(containerDto.WarehouseId.Value);
             if (!warehouseExists)
-                return OperationResult<Container?>.Failure($"Warehouse with ID {containerDto.WarehouseId.Value} does not exist.");
+                return OperationResult<ContainerEntity?>.Failure($"Warehouse with ID {containerDto.WarehouseId.Value} does not exist.");
         }
 
-        var container = new Container()
+        var container = new ContainerEntity()
         {
             MaxWeight = containerDto.MaxWeight,
             Type = containerDto.Type,
@@ -38,7 +37,7 @@ public class ContainerService : IContainerService
         await _unitOfWork.ContainerRepository.AddAsync(container);
         await _unitOfWork.CommitAsync();
 
-        return OperationResult<Container?>.Success(container);
+        return OperationResult<ContainerEntity?>.Success(container);
     }
 
     public async Task<OperationResult> DeleteContainerAsync(int id)
@@ -54,28 +53,28 @@ public class ContainerService : IContainerService
         return OperationResult.Success();
     }
 
-    public async Task<OperationResult<Container?>> GetContainerByIdAsync(int id)
+    public async Task<OperationResult<ContainerEntity?>> GetContainerByIdAsync(int id)
     {
         var container = await _unitOfWork.ContainerRepository.GetByIdAsync(id);
 
         if (container == null)
         {
-            return OperationResult<Container?>.Failure("Container not found");
+            return OperationResult<ContainerEntity?>.Failure("Container not found");
         }
 
-        return OperationResult<Container?>.Success(container);
+        return OperationResult<ContainerEntity?>.Success(container);
     }
 
-    public async Task<OperationResult<IEnumerable<Container>>> GetContainersAsync()
+    public async Task<OperationResult<IEnumerable<ContainerEntity>>> GetContainersAsync()
     {
         var containers = await _unitOfWork.ContainerRepository.GetContainersWithProductsAsync();
 
         if (containers.Any())
         {
-            return OperationResult<IEnumerable<Container>>.Success(containers);
+            return OperationResult<IEnumerable<ContainerEntity>>.Success(containers);
         }
 
-        return OperationResult<IEnumerable<Container>>.Failure("Empty container list");
+        return OperationResult<IEnumerable<ContainerEntity>>.Failure("Empty container list");
     }
 
     public async Task<OperationResult> AddProductsToContainerAsync(int containerId, AddProductsToContainerDto dto)
@@ -114,6 +113,7 @@ public class ContainerService : IContainerService
             return OperationResult.Failure($"Error with adding product: {ex.Message}");
         }
 
+        
         container.Products.AddRange(products);
         await _unitOfWork.CommitAsync();
 
