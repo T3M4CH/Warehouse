@@ -6,7 +6,7 @@ using WarehouseApi.Repositories.Interfaces;
 
 namespace WarehouseApi.Repositories;
 
-public class WarehouseRepository : IWarehouseRepository
+public class WarehouseRepository : IWarehouseRepository, IDisposable, IAsyncDisposable
 {
     private readonly DataContext _context;
 
@@ -87,5 +87,15 @@ public class WarehouseRepository : IWarehouseRepository
         return await _context.Containers
             .Where(c => c.WarehouseId == warehouseId)
             .SumAsync(c => c.MaxWeight);
+    }
+
+    public void Dispose()
+    {
+        _context.Dispose();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await _context.DisposeAsync();
     }
 }
