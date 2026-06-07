@@ -7,7 +7,7 @@ public static class MiddlewareExtension
 {
     public static WebApplication AddMiddleware(this WebApplication app)
     {
-        app.MapOpenApi();
+        //app.MapOpenApi();
         app.MapScalarApiReference();
         
         app.Use(async (context, next) =>
