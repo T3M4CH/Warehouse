@@ -20,7 +20,7 @@ public static class ApplicationServiceExtension
 {
     public static WebApplicationBuilder AddApplicationServices(this WebApplicationBuilder builder)
     {
-        builder.Services.AddOpenApi();
+        //builder.Services.AddOpenApi();
         builder.Services.AddDbContext<DataContext>
             (options => options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection")));
 
